@@ -60,7 +60,7 @@ class CreateTopicList extends HTMLElement {
             let content = `
                         <li>
                             ${!!topic.link ? `
-                            <a href="${topic.link}">
+                            <a target="__blank" href="${topic.link}">
                                 ${title}
                             </a>`
                     :
