@@ -48,10 +48,18 @@ class CreateTopicList extends HTMLElement {
      * @param {boolean} options.boldTitle Define se o título do tópico será exibido em negrito.
      * @returns {string} Conteúdo HTML da lista de tópicos.
      */
-    __getContent(topics, options = { boldTitle: true }) {
-        const { boldTitle } = options;
+    __getContent(topics, options = { boldTitle: true, ulStyle: { padding: 0, listStylePosition: 'inside' } }) {
+        const { boldTitle, ulStyle } = options;
 
-        let baseUl = `<ul>`;
+        let ulStyleString = '';
+
+        if (!!ulStyle) {
+            ulStyleString = Object.entries(ulStyle).map(([key, value]) => {
+                return `${key.replace(/([A-Z])/g, '-$1').toLowerCase()}: ${value};`;
+            }).join(' ');
+        }
+
+        let baseUl = `<ul style="${ulStyleString}">`;
 
         topics.forEach(topic => {
 
@@ -70,7 +78,7 @@ class CreateTopicList extends HTMLElement {
                 `;
 
             if (topic.children && topic.children.length > 0) {
-                const childrenContent = this.__getContent(topic.children, { boldTitle: false });
+                const childrenContent = this.__getContent(topic.children, { boldTitle: false, ulStyle: null });
                 content = content.concat(childrenContent);
             }
 
