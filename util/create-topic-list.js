@@ -31,6 +31,9 @@ class CreateTopicList extends HTMLElement {
         const content = this.__getContent(data);
 
         this.innerHTML = content;
+        this.innerHTML += `<hr/>`;
+        this.innerHTML += `<p class="m-0"><em>Autor: ${this.getAuthor()}</em></p>`;
+        this.innerHTML += `<p><em>Última atualização: ${this.getLastUpdatedDate()}</em></p>`;
     }
 
     /**
@@ -91,6 +94,13 @@ class CreateTopicList extends HTMLElement {
         return baseUl;
     }
 
+    getAuthor() {
+        return "Christian Bueno";
+    }
+
+    getLastUpdatedDate() {
+        return "";
+    }
 }
 
 export default CreateTopicList;
